@@ -1,0 +1,38 @@
+From 2fddbb7c24fc50e9300e4b793766179961a488ab Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Thu, 19 Aug 2021 09:56:47 +0900
+Subject: [PATCH 3/3] Work arround to execute pinyindict for cross build
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ im/pinyin/CMakeLists.txt | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/im/pinyin/CMakeLists.txt b/im/pinyin/CMakeLists.txt
+index 2ea39cf..d239d87 100644
+--- a/im/pinyin/CMakeLists.txt
++++ b/im/pinyin/CMakeLists.txt
+@@ -23,14 +23,14 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pinyin-addon.conf" RENAME pinyin.conf
+ 
+ add_custom_command(
+   OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/emoji.dict"
+-  DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/emoji.txt" LibIME::pinyindict
+-  COMMAND LibIME::pinyindict "${CMAKE_CURRENT_SOURCE_DIR}/emoji.txt" "${CMAKE_CURRENT_BINARY_DIR}/emoji.dict")
++  DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/emoji.txt"
++  COMMAND "pinyindict" "${CMAKE_CURRENT_SOURCE_DIR}/emoji.txt" "${CMAKE_CURRENT_BINARY_DIR}/emoji.dict")
+ add_custom_target(emoji-dict ALL DEPENDS "emoji.dict")
+ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/emoji.dict" DESTINATION "${FCITX_INSTALL_PKGDATADIR}/pinyin")
+ 
+ add_custom_command(
+   OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/chaizi.dict"
+-  DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/chaizi.txt" LibIME::pinyindict
+-  COMMAND LibIME::pinyindict "${CMAKE_CURRENT_SOURCE_DIR}/chaizi.txt" "${CMAKE_CURRENT_BINARY_DIR}/chaizi.dict")
++  DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/chaizi.txt"
++  COMMAND "pinyindict" "${CMAKE_CURRENT_SOURCE_DIR}/chaizi.txt" "${CMAKE_CURRENT_BINARY_DIR}/chaizi.dict")
+ add_custom_target(chaizi-dict ALL DEPENDS "chaizi.dict")
+ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/chaizi.dict" DESTINATION "${FCITX_INSTALL_PKGDATADIR}/pinyin")
+-- 
+2.34.1
+

@@ -1,0 +1,31 @@
+From c8cf048cd9a0234e9823bc2d27a4c0a99b5d32ec Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Wed, 4 Aug 2021 14:11:13 +0900
+Subject: [PATCH 2/3] Add cmake option ENABLE_METAINFO
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ CMakeLists.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 068e0b4..6584f68 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -92,9 +92,11 @@ if (ENABLE_TEST)
+     endif()
+ endif ()
+ 
++if (ENABLE_METAINFO)
+ fcitx5_translate_desktop_file(org.fcitx.Fcitx5.Addon.ChineseAddons.metainfo.xml.in
+     org.fcitx.Fcitx5.Addon.ChineseAddons.metainfo.xml XML)
+ 
+ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/org.fcitx.Fcitx5.Addon.ChineseAddons.metainfo.xml" DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
++endif()
+ 
+ feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
+-- 
+2.34.1
+
