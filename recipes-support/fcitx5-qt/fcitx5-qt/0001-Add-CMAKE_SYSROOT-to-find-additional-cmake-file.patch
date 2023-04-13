@@ -1,0 +1,28 @@
+From 453a4f5f70d8b35f548b7e6bcd61efd8e0e2dcc5 Mon Sep 17 00:00:00 2001
+From: He Yong <hyyoxhk@163.com>
+Date: Mon, 3 Apr 2023 15:52:36 +0800
+Subject: [PATCH] Add CMAKE_SYSROOT to find additional cmake file
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: He Yong <hyyoxhk@163.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 0d76aab..5afc33c 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -59,7 +59,7 @@ if (BUILD_ONLY_PLUGIN)
+ # Dup a little bit option here.
+ include(CompilerSettings)
+ else()
+-include("${FCITX_INSTALL_CMAKECONFIG_DIR}/Fcitx5Utils/Fcitx5CompilerSettings.cmake")
++include("${CMAKE_SYSROOT}${FCITX_INSTALL_CMAKECONFIG_DIR}/Fcitx5Utils/Fcitx5CompilerSettings.cmake")
+ find_package(Gettext REQUIRED)
+ endif()
+ 
+-- 
+2.34.1
+
