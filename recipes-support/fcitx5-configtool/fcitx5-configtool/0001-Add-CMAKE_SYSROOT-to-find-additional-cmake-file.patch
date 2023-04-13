@@ -1,0 +1,28 @@
+From 87c2c51c96b16b679d48be78145a1e14029d581d Mon Sep 17 00:00:00 2001
+From: He Yong <hyyoxhk@163.com>
+Date: Tue, 4 Apr 2023 10:18:06 +0800
+Subject: [PATCH] Add CMAKE_SYSROOT to find additional cmake file
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: He Yong <hyyoxhk@163.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 837fc1f..61d0ce2 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -68,7 +68,7 @@ find_package(KF5WidgetsAddons REQUIRED)
+ find_package(IsoCodes REQUIRED)
+ kde_enable_exceptions()
+ 
+-include("${FCITX_INSTALL_CMAKECONFIG_DIR}/Fcitx5Utils/Fcitx5CompilerSettings.cmake")
++include("${CMAKE_SYSROOT}${FCITX_INSTALL_CMAKECONFIG_DIR}/Fcitx5Utils/Fcitx5CompilerSettings.cmake")
+ 
+ find_package(PkgConfig REQUIRED)
+ find_package(Gettext REQUIRED)
+-- 
+2.34.1
+
