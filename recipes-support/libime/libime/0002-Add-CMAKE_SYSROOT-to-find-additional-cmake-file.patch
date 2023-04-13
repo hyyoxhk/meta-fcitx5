@@ -1,0 +1,28 @@
+From 3900e6eb2ddaf4f5a19b5d9a9727bbd8e6c2f014 Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Wed, 4 Aug 2021 14:49:55 +0900
+Subject: [PATCH 2/4] Add CMAKE_SYSROOT to find additional cmake file
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 6a1f9ac..64e1e68 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -28,7 +28,7 @@ include(ECMUninstallTarget)
+ include(CheckLibraryExists)
+ 
+ find_package(Fcitx5Utils REQUIRED)
+-include("${FCITX_INSTALL_CMAKECONFIG_DIR}/Fcitx5Utils/Fcitx5CompilerSettings.cmake")
++include("${CMAKE_SYSROOT}${FCITX_INSTALL_CMAKECONFIG_DIR}/Fcitx5Utils/Fcitx5CompilerSettings.cmake")
+ 
+ find_package(Boost 1.61 REQUIRED COMPONENTS iostreams filesystem regex)
+ set(LIBIME_INSTALL_PKGDATADIR "${CMAKE_INSTALL_FULL_DATADIR}/libime")
+-- 
+2.34.1
+

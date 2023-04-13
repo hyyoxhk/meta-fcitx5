@@ -1,0 +1,38 @@
+From 95e711a3693593f19a97bee6e3e56a1f80ed76b2 Mon Sep 17 00:00:00 2001
+From: He Yong <hyyoxhk@163.com>
+Date: Sat, 25 Mar 2023 14:17:03 +0800
+Subject: [PATCH 4/4] Fix variable is initialized
+
+tablebaseddictionary.cpp: In member function 'void libime::TableBasedDictionary::loadBinary(std::istream&)':
+tablebaseddictionary.cpp:660:5: warning: 'version' may be used uninitialized in this function [-Wmaybe-uninitialized]
+|   660 |     if (version != tableBinaryFormatVersion) {
+|       |     ^~
+tablebaseddictionary.cpp:656:5: warning: 'magic' may be used uninitialized in this function [-Wmaybe-uninitialized]
+|   656 |     if (magic != tableBinaryFormatMagic) {
+|       |     ^~
+
+Upstream-Status: Inappropriate [oe-core specific]
+
+Signed-off-by: He Yong <hyyoxhk@163.com>
+---
+ src/libime/table/tablebaseddictionary.cpp | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/libime/table/tablebaseddictionary.cpp b/src/libime/table/tablebaseddictionary.cpp
+index 1e0067f..8621b3f 100644
+--- a/src/libime/table/tablebaseddictionary.cpp
++++ b/src/libime/table/tablebaseddictionary.cpp
+@@ -650,8 +650,8 @@ uint32_t maxValue(const DATrie<uint32_t> &trie) {
+ 
+ void TableBasedDictionary::loadBinary(std::istream &in) {
+     FCITX_D();
+-    uint32_t magic;
+-    uint32_t version;
++    uint32_t magic = 0;
++    uint32_t version = 0;
+     throw_if_io_fail(unmarshall(in, magic));
+     if (magic != tableBinaryFormatMagic) {
+         throw std::invalid_argument("Invalid table magic.");
+-- 
+2.34.1
+

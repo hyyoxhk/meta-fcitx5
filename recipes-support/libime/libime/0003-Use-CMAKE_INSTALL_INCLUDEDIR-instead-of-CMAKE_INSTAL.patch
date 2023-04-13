@@ -1,0 +1,58 @@
+From 7d1a948c17938e90afc4d7f188a327afc15963b9 Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Wed, 18 Aug 2021 18:30:31 +0900
+Subject: [PATCH 3/4] Use CMAKE_INSTALL_INCLUDEDIR instead of
+ CMAKE_INSTALL_FULL_INCLUDEDIR
+
+Upstream-Status: Pending
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+Test-by: He Yong <hyyoxhk@163.com>
+---
+ src/libime/core/CMakeLists.txt   | 2 +-
+ src/libime/pinyin/CMakeLists.txt | 2 +-
+ src/libime/table/CMakeLists.txt  | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/libime/core/CMakeLists.txt b/src/libime/core/CMakeLists.txt
+index 42202e7..c5621f5 100644
+--- a/src/libime/core/CMakeLists.txt
++++ b/src/libime/core/CMakeLists.txt
+@@ -75,7 +75,7 @@ set_target_properties(IMECore
+ target_include_directories(IMECore PUBLIC
+     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../..>
+     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
+-    $<INSTALL_INTERFACE:${CMAKE_INSTALL_FULL_INCLUDEDIR}/LibIME>)
++    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/LibIME>)
+ 
+ target_link_libraries(IMECore PUBLIC Fcitx5::Utils Boost::boost PRIVATE kenlm)
+ 
+diff --git a/src/libime/pinyin/CMakeLists.txt b/src/libime/pinyin/CMakeLists.txt
+index 11825e8..1b90b43 100644
+--- a/src/libime/pinyin/CMakeLists.txt
++++ b/src/libime/pinyin/CMakeLists.txt
+@@ -37,7 +37,7 @@ set_target_properties(IMEPinyin PROPERTIES
+ target_include_directories(IMEPinyin PUBLIC
+     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../..>
+     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
+-    $<INSTALL_INTERFACE:${CMAKE_INSTALL_FULL_INCLUDEDIR}/LibIME>)
++    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/LibIME>)
+ 
+ target_link_libraries(IMEPinyin PUBLIC Fcitx5::Utils Boost::boost LibIME::Core)
+ 
+diff --git a/src/libime/table/CMakeLists.txt b/src/libime/table/CMakeLists.txt
+index d7748b7..c357ef6 100644
+--- a/src/libime/table/CMakeLists.txt
++++ b/src/libime/table/CMakeLists.txt
+@@ -32,7 +32,7 @@ set_target_properties(IMETable
+ target_include_directories(IMETable PUBLIC
+     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../..>
+     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
+-    $<INSTALL_INTERFACE:${CMAKE_INSTALL_FULL_INCLUDEDIR}/LibIME>)
++    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/LibIME>)
+ 
+ target_link_libraries(IMETable PUBLIC Fcitx5::Utils Boost::boost LibIME::Core PRIVATE Boost::regex)
+ 
+-- 
+2.34.1
+
