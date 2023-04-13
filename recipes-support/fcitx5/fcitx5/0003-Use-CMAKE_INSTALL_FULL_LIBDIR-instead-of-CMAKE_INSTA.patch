@@ -1,0 +1,30 @@
+From c8db978251d16ef332de1d3a9bd67d0b8bd224d2 Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Wed, 12 Apr 2023 23:59:44 +0800
+Subject: [PATCH 3/3] Use CMAKE_INSTALL_FULL_LIBDIR instead of
+ CMAKE_INSTALL_FULL_LIBDIR
+
+Upstream-Status: Pending
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+Test-by: He Yong <hyyoxhk@163.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 1fe1041..10341a7 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -177,7 +177,7 @@ endif()
+ 
+ # directory needed by bsd
+ if(NOT CMAKE_INSTALL_LIBDATADIR)
+-  set(CMAKE_INSTALL_LIBDATADIR "${CMAKE_INSTALL_LIBDIR}" CACHE PATH "libdata root (LIBDIR)")
++  set(CMAKE_INSTALL_LIBDATADIR "${CMAKE_INSTALL_FULL_LIBDIR}" CACHE PATH "libdata root (LIBDIR)")
+ endif()
+ 
+ get_filename_component(CMAKE_INSTALL_FULL_LIBDATADIR "${CMAKE_INSTALL_LIBDATADIR}" ABSOLUTE)
+-- 
+2.34.1
+
