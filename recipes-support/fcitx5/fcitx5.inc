@@ -13,7 +13,7 @@ SRC_URI = "https://download.fcitx-im.org/fcitx5/fcitx5/fcitx5-${PV}_dict.tar.xz 
 SRC_URI[sha256sum] = "1a746d3a0337ed446999234324d731303b9db21186d4d6842e5dd3a035a6bd6e"
 
 PACKAGECONFIG[enchant] = "-DENABLE_ENCHANT=On,-DENABLE_ENCHANT=Off,enchant2"
-PACKAGECONFIG[x11] = "-DENABLE_X11=On,-DENABLE_X11=Off,libxcb xcb-util xcb-util-keysyms xcb-util-wm xcb-imdkit cairo libxkbfile"
+PACKAGECONFIG[x11] = "-DENABLE_X11=On,-DENABLE_X11=Off,libxcb xcb-util xcb-util-keysyms xcb-util-wm xcb-imdkit libxkbfile"
 PACKAGECONFIG[wayland] = "-DENABLE_WAYLAND=On,-DENABLE_WAYLAND=Off,wayland wayland-native wayland-protocols"
 PACKAGECONFIG[dbus] = "-DENABLE_DBUS=On,-DENABLE_DBUS=Off,dbus"
 PACKAGECONFIG[server] = "-DENABLE_SERVER=On,-DENABLE_SERVER=Off"
