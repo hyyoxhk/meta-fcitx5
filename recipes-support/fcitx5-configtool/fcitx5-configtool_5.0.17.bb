@@ -7,10 +7,15 @@ DEPENDS = "extra-cmake-modules qtx11extras kitemviews fcitx5 fcitx5-qt qtsvg kwi
 
 SRC_URI = "https://download.fcitx-im.org/fcitx5/fcitx5-configtool/${BPN}-${PV}.tar.xz \
            file://0001-Add-CMAKE_SYSROOT-to-find-additional-cmake-file.patch \
+           file://0002-split-X11-related-code.patch \
            "
 SRC_URI[sha256sum] = "f8b6196d23d14a6acc9a2b3dbc3772b6e5b2e3a5147b78b649238a3d775786d5"
 
-inherit cmake_qt5 pkgconfig
+inherit cmake_qt5 pkgconfig gettext
+
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
+
+PACKAGECONFIG[x11] = "-DENABLE_X11=On,-DENABLE_X11=Off,qtx11extras libx11 xkeyboard-config"
 
 EXTRA_OECMAKE += " \
     -DCMAKE_SYSROOT=${RECIPE_SYSROOT} \

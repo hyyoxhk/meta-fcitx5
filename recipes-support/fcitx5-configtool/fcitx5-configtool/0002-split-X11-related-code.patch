@@ -1,0 +1,190 @@
+From 7eabc8c7134426796c7a70820216340d1510148a Mon Sep 17 00:00:00 2001
+From: He Yong <hyyoxhk@163.com>
+Date: Wed, 29 Nov 2023 13:56:29 +0800
+Subject: [PATCH 2/2] split X11 related code
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: He Yong <hyyoxhk@163.com>
+---
+ CMakeLists.txt                              | 19 +++++++++++++------
+ config.h.in                                 |  1 +
+ src/CMakeLists.txt                          |  2 +-
+ src/lib/configwidgetslib/CMakeLists.txt     |  5 ++++-
+ src/lib/configwidgetslib/layoutselector.cpp | 11 ++++++++---
+ src/lib/configwidgetslib/layoutselector.h   |  4 ++++
+ 6 files changed, 31 insertions(+), 11 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 61d0ce2..b44f31d 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -22,13 +22,17 @@ include(FeatureSummary)
+ include(ECMSetupVersion)
+ include(GenerateExportHeader)
+ option(ENABLE_KCM "Enable KDE Config Module" On)
++option(ENABLE_X11 "Enable X11 support" On)
+ option(ENABLE_CONFIG_QT "Enable fcitx5-config-qt" On)
+ option(ENABLE_TEST "Enable test" Off)
+ add_definitions(-DTRANSLATION_DOMAIN=\"org.fcitx.fcitx5.kcm\")
+ add_definitions(-DFCITX_GETTEXT_DOMAIN=\"fcitx5-configtool\")
+ add_definitions(-DQT_NO_KEYWORDS)
+ 
+-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Widgets X11Extras Concurrent)
++find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Widgets Concurrent)
++if (ENABLE_X11)
++    find_package(Qt5X11Extras REQUIRED)
++endif()
+ 
+ if (ENABLE_CONFIG_QT)
+     find_package(KF5ItemViews REQUIRED)
+@@ -72,15 +76,18 @@ include("${CMAKE_SYSROOT}${FCITX_INSTALL_CMAKECONFIG_DIR}/Fcitx5Utils/Fcitx5Comp
+ 
+ find_package(PkgConfig REQUIRED)
+ find_package(Gettext REQUIRED)
+-find_package(X11 REQUIRED)
+-find_package(XKeyboardConfig REQUIRED)
+-pkg_check_modules(XkbFile "xkbfile" REQUIRED IMPORTED_TARGET)
++if (ENABLE_X11)
++    find_package(X11 REQUIRED)
++    find_package(XKeyboardConfig REQUIRED)
++    pkg_check_modules(XkbFile "xkbfile" REQUIRED IMPORTED_TARGET)
++endif()
+ 
+ configure_file(config.h.in config.h)
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+ add_subdirectory(po)
+ add_subdirectory(src)
+-add_subdirectory(layout)
+-
++if (ENABLE_X11)
++    add_subdirectory(layout)
++endif()
+ feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
+diff --git a/config.h.in b/config.h.in
+index de48704..a1fb7f3 100644
+--- a/config.h.in
++++ b/config.h.in
+@@ -11,6 +11,7 @@
+ #cmakedefine ISOCODES_ISO639_2_JSON "@ISOCODES_ISO639_2_JSON@"
+ #cmakedefine ISOCODES_ISO639_3_JSON "@ISOCODES_ISO639_3_JSON@"
+ #cmakedefine ISOCODES_ISO639_5_JSON "@ISOCODES_ISO639_5_JSON@"
++#cmakedefine ENABLE_X11
+ 
+ #define FCITX5_QT5_GUI_WRAPPER "@FCITX5_QT5_GUI_WRAPPER@"
+ 
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index d8cc467..d25b371 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -7,7 +7,7 @@ if (ENABLE_CONFIG_QT)
+     add_subdirectory(configtool)
+ endif()
+ 
+-add_subdirectory(migrator)
++#add_subdirectory(migrator)
+ 
+ if (ENABLE_KCM)
+     add_subdirectory(plasmathemegenerator)
+diff --git a/src/lib/configwidgetslib/CMakeLists.txt b/src/lib/configwidgetslib/CMakeLists.txt
+index 235843d..cdd87a2 100644
+--- a/src/lib/configwidgetslib/CMakeLists.txt
++++ b/src/lib/configwidgetslib/CMakeLists.txt
+@@ -19,4 +19,7 @@ set_target_properties(configwidgetslib PROPERTIES
+     AUTOUIC_OPTIONS "-tr=fcitx::tr2fcitx;--include=fcitxqti18nhelper.h"
+ )
+ target_include_directories(configwidgetslib INTERFACE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
+-target_link_libraries(configwidgetslib Qt5::Core Qt5::Widgets Qt5::X11Extras KF5::WidgetsAddons KF5::ItemViews Fcitx5::Utils Fcitx5Qt5::DBusAddons Fcitx5Qt5::WidgetsAddons configlib layoutlib)
++target_link_libraries(configwidgetslib Qt5::Core Qt5::Widgets KF5::WidgetsAddons KF5::ItemViews Fcitx5::Utils Fcitx5Qt5::DBusAddons Fcitx5Qt5::WidgetsAddons configlib)
++if (ENABLE_X11)
++    target_link_libraries(configwidgetslib Qt5::X11Extras layoutlib)
++endif()
+diff --git a/src/lib/configwidgetslib/layoutselector.cpp b/src/lib/configwidgetslib/layoutselector.cpp
+index 534f27a..a2e4cbb 100644
+--- a/src/lib/configwidgetslib/layoutselector.cpp
++++ b/src/lib/configwidgetslib/layoutselector.cpp
+@@ -6,7 +6,9 @@
+ 
+ #include "layoutselector.h"
+ #include "dbusprovider.h"
++#ifdef ENABLE_X11
+ #include "keyboardlayoutwidget.h"
++#endif
+ #include "layoutmodel.h"
+ #include "ui_layoutselector.h"
+ #include <QDBusPendingCallWatcher>
+@@ -14,7 +16,6 @@
+ #include <QDialogButtonBox>
+ #include <QPushButton>
+ #include <QStringListModel>
+-#include <QX11Info>
+ #include <fcitx-utils/i18n.h>
+ #include <fcitxqtcontrollerproxy.h>
+ #include <fcitxqtdbustypes.h>
+@@ -46,13 +47,13 @@ LayoutSelector::LayoutSelector(DBusProvider *dbus, QWidget *parent)
+     connect(ui_->variantComboBox,
+             qOverload<int>(&QComboBox::currentIndexChanged), this,
+             &LayoutSelector::variantComboBoxChanged);
+-    if (QX11Info::isPlatformX11()) {
++#ifdef ENABLE_X11
+         keyboardLayoutWidget_ = new KeyboardLayoutWidget(this);
+         keyboardLayoutWidget_->setMinimumSize(QSize(400, 200));
+         keyboardLayoutWidget_->setSizePolicy(QSizePolicy::Expanding,
+                                              QSizePolicy::Expanding);
+         ui_->verticalLayout->addWidget(keyboardLayoutWidget_);
+-    }
++#endif
+ }
+ 
+ LayoutSelector::~LayoutSelector() {}
+@@ -130,18 +131,22 @@ void LayoutSelector::layoutComboBoxChanged() {
+ }
+ 
+ void LayoutSelector::variantComboBoxChanged() {
++#ifdef ENABLE_X11
+     if (!keyboardLayoutWidget_) {
+         return;
+     }
++#endif
+ 
+     auto layout = ui_->layoutComboBox->currentData().toString();
+     auto variant = ui_->variantComboBox->currentData().toString();
++#ifdef ENABLE_X11
+     if (layout.isEmpty()) {
+         keyboardLayoutWidget_->setVisible(false);
+     } else {
+         keyboardLayoutWidget_->setKeyboardLayout(layout, variant);
+         keyboardLayoutWidget_->setVisible(true);
+     }
++#endif
+ }
+ 
+ } // namespace kcm
+diff --git a/src/lib/configwidgetslib/layoutselector.h b/src/lib/configwidgetslib/layoutselector.h
+index beee182..6609dad 100644
+--- a/src/lib/configwidgetslib/layoutselector.h
++++ b/src/lib/configwidgetslib/layoutselector.h
+@@ -25,7 +25,9 @@ namespace fcitx {
+ namespace kcm {
+ 
+ class DBusProvider;
++#ifdef ENABLE_X11
+ class KeyboardLayoutWidget;
++#endif
+ class LanguageFilterModel;
+ class LayoutInfoModel;
+ class VariantInfoModel;
+@@ -53,7 +55,9 @@ private:
+     std::unique_ptr<Ui::LayoutSelector> ui_;
+     DBusProvider *dbus_;
+     LayoutProvider *layoutProvider_;
++#ifdef ENABLE_X11
+     KeyboardLayoutWidget *keyboardLayoutWidget_ = nullptr;
++#endif
+     Iso639 iso639_;
+ 
+     QString preSelectLayout_;
+-- 
+2.34.1
+
