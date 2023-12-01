@@ -8,16 +8,20 @@ DEPENDS = "extra-cmake-modules fcitx5 gettext"
 
 SRC_URI = "https://download.fcitx-im.org/fcitx5/fcitx5-qt/fcitx5-qt-${PV}.tar.xz \
            file://0001-Add-CMAKE_SYSROOT-to-find-additional-cmake-file.patch \
+           file://0002-Replace-x11-s-keysym-with-libxkbcommon-s-keysym.patch \
+           file://0003-Add-ENABLE_X11-option.patch \
            "
 SRC_URI[sha256sum] = "4268e7a1277692a79dcff08e662d1e74407e598a61d3d0386bc64a51809e91f4"
 
-inherit cmake_qt5
+inherit cmake_qt5 gettext
 
-PACKAGECONFIG ??= "qt5"
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)} \
+                   qt5"
 
 PACKAGECONFIG[qt4] = "-DENABLE_QT4=On,-DENABLE_QT4=Off"
 PACKAGECONFIG[qt5] = "-DENABLE_QT5=On,-DENABLE_QT5=Off"
 PACKAGECONFIG[qt6] = "-DENABLE_QT6=On,-DENABLE_QT6=Off"
+PACKAGECONFIG[x11] = "-DENABLE_X11=On,-DENABLE_X11=Off,libxcb libx11"
 
 EXTRA_OECMAKE += " \
     -DCMAKE_SYSROOT=${RECIPE_SYSROOT} \
