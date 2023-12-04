@@ -6,7 +6,7 @@ Subject: [PATCH] Add ENABLE_X11 option
 it`s easy to port to a pure Wayland environment
 that we split the code of x11
 
-Upstream-Status: Pending
+Upstream-Status: Submitted [https://github.com/fcitx/fcitx5-qt/pull/53]
 
 Signed-off-by: He Yong <hyyoxhk@163.com>
 ---

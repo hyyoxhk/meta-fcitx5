@@ -3,7 +3,7 @@ From: He Yong <hyyoxhk@163.com>
 Date: Wed, 29 Nov 2023 16:09:52 +0800
 Subject: [PATCH 1/2] Replace x11`s keysym with libxkbcommon`s keysym
 
-Upstream-Status: Pending
+Upstream-Status: Submitted [https://github.com/fcitx/fcitx5-qt/pull/53]
 
 Signed-off-by: He Yong <hyyoxhk@163.com>
 ---
