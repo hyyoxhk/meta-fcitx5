@@ -8,10 +8,8 @@ DEPENDS = "extra-cmake-modules fcitx5 gettext"
 
 SRC_URI = "https://download.fcitx-im.org/fcitx5/fcitx5-qt/fcitx5-qt-${PV}.tar.xz \
            file://0001-Add-CMAKE_SYSROOT-to-find-additional-cmake-file.patch \
-           file://0002-Replace-x11-s-keysym-with-libxkbcommon-s-keysym.patch \
-           file://0003-Add-ENABLE_X11-option.patch \
            "
-SRC_URI[sha256sum] = "4268e7a1277692a79dcff08e662d1e74407e598a61d3d0386bc64a51809e91f4"
+SRC_URI[sha256sum] = "f663f12f0c3806684f43dcc64decc4f81c853e9027e2203188e20d7507b39c31"
 
 inherit cmake_qt5 gettext
 
