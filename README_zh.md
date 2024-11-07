@@ -38,12 +38,14 @@
 ```shell
 $> git clone -b kirkstone https://git.yoctoproject.org/poky
 $> cd poky
-$> git clone -b kirkstone git://github.com/openembedded/meta-openembedded.git
-$> git clone -b kirkstone git://github.com/hyyoxhk/meta-fcitx5.git
+$> git clone -b kirkstone https://github.com/openembedded/meta-openembedded.git
+$> git clone -b kirkstone https://github.com/meta-qt5/meta-qt5.git
+$> git clone -b kirkstone https://github.com/hyyoxhk/meta-fcitx5.git
 $>
 $> source oe-init-build-env
 ...
 $ bitbake-layers add-layer ../meta-openembedded/meta-oe
+$ bitbake-layers add-layer ../meta-qt5
 $ bitbake-layers add-layer ../meta-fcitx5
 ```
 
