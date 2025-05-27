@@ -60,4 +60,4 @@ IMAGE_INSTALL += " fcitx5 fcitx5-chinese-addons"
 
 ## 贡献
 
-如果您有提交的修正, 请在本仓库上提 pull requests, 地址是 https://github.com/hyyoxhk/meta-fcits5/pulls
+如果您有提交的修正, 请在本仓库上提 pull requests, 地址是 https://github.com/hyyoxhk/meta-fcitx5/pulls

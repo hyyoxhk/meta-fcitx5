@@ -59,7 +59,7 @@ IMAGE_INSTALL += " fcitx5 fcitx5-chinese-addons"
 
 ## Contributing
 
-If you want to contribute changes, you can send Github pull requests at https://github.com/hyyoxhk/meta-fcits5/pulls
+If you want to contribute changes, you can send Github pull requests at https://github.com/hyyoxhk/meta-fcitx5/pulls
 
 ## Maintainer
 
