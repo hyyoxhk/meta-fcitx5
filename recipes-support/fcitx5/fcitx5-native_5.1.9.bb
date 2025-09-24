@@ -4,7 +4,9 @@ DEPENDS = "extra-cmake-modules-native fmt-native"
 
 inherit cmake pkgconfig gettext native
 
-PACKAGECONFIG = "libevent"
+USE_NLS="yes"
+
+PACKAGECONFIG = "libuv"
 
 EXTRA_OECMAKE += " \
     -DDL_INCLUDE_DIR=/usr/include \
@@ -45,6 +47,6 @@ do_install:append () {
 
     rm -rf ${D}/${datadir}
 
-    install -m 755 ${B}/src/modules/spell/dict/comp-spell-dict ${D}/${bindir}
+    install -m 755 ${B}/src/modules/spell/comp-spell-dict ${D}/${bindir}
     install -m 644 ${S}/cmake/Fcitx5CompilerSettings.cmake ${D}/${libdir}/cmake/Fcitx5Utils
 }

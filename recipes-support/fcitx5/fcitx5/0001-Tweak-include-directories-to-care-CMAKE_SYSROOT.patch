@@ -1,7 +1,7 @@
-From 5230d8c60bc0eaed6e9081a3a602a3f7311f6914 Mon Sep 17 00:00:00 2001
+From 5feddeeff98eed4bf48c0cb1bd430b68567b61f7 Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Tue, 27 Jul 2021 05:50:35 +0900
-Subject: [PATCH] Tweak include directories to care CMAKE_SYSROOT
+Subject: [PATCH 2/4] Tweak include directories to care CMAKE_SYSROOT
 
 Upstream-Status: Inappropriate [embedded specific]
 
@@ -11,7 +11,7 @@ Signed-off-by: Takuro Ashie <ashie@clear-code.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/src/lib/fcitx-utils/Fcitx5ModuleTemplate.cmake.in b/src/lib/fcitx-utils/Fcitx5ModuleTemplate.cmake.in
-index e51f044..ab7b470 100644
+index e51f044a..ab7b470b 100644
 --- a/src/lib/fcitx-utils/Fcitx5ModuleTemplate.cmake.in
 +++ b/src/lib/fcitx-utils/Fcitx5ModuleTemplate.cmake.in
 @@ -4,4 +4,4 @@ endif()
