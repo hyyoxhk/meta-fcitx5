@@ -25,3 +25,5 @@ PACKAGECONFIG[emoji] = "-DENABLE_EMOJI=On,-DENABLE_EMOJI=Off"
 PACKAGECONFIG[uuid] = "-DENABLE_LIBUUID=On,-DENABLE_LIBUUID=Off,util-linux-libuuid"
 
 EXTRA_OECMAKE += "-DENABLE_TEST=Off"
+EXTRA_OECMAKE += "-DISOCODES_ISO639_JSON=${datadir}/iso-codes/json/iso_639-3.json"
+EXTRA_OECMAKE += "-DISOCODES_ISO3166_JSON=${datadir}/iso-codes/json/iso_3166-1.json"
