@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://LICENSES/LGPL-2.1-or-later.txt;md5=2a4f4fd2128ea2f650
 
 DEPENDS = "extra-cmake-modules fcitx5 gettext"
 
-SRC_URI = "https://download.fcitx-im.org/fcitx5/fcitx5-qt/fcitx5-qt-${PV}.tar.xz \
+SRC_URI = "https://download.fcitx-im.org/fcitx5/fcitx5-qt/fcitx5-qt-${PV}.tar.zst \
            file://0001-Add-CMAKE_SYSROOT-to-find-additional-cmake-file.patch \
            "
-SRC_URI[sha256sum] = "f663f12f0c3806684f43dcc64decc4f81c853e9027e2203188e20d7507b39c31"
+SRC_URI[sha256sum] = "31545416300a80bf523f2ca04aeeb8405e2d35ef70ac5fc22d5a02eabd8f85e8"
 
 inherit cmake_qt5 gettext
 
