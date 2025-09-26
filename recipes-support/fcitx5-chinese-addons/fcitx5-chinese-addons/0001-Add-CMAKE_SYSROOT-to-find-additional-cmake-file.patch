@@ -1,4 +1,4 @@
-From 768dfac36e7362165bf6bed7226e272cc7358cbd Mon Sep 17 00:00:00 2001
+From f29469c49cf1de26bb9fca96d72ae4e77005000f Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Wed, 4 Aug 2021 14:09:58 +0900
 Subject: [PATCH 1/3] Add CMAKE_SYSROOT to find additional cmake file
@@ -11,7 +11,7 @@ Signed-off-by: Takuro Ashie <ashie@clear-code.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 874b098..068e0b4 100644
+index 1268dd1..150ddf3 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -22,7 +22,7 @@ else()
