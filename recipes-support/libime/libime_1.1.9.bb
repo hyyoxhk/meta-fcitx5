@@ -1,8 +1,8 @@
 require ${BPN}.inc
 
-DEPENDS = "extra-cmake-modules fcitx5 boost libime-native"
+DEPENDS = "extra-cmake-modules fcitx5 boost zstd libime-native"
 
-inherit cmake
+inherit cmake pkgconfig
 
 EXTRA_OECMAKE += " \
     -DCMAKE_SYSROOT=${RECIPE_SYSROOT} \

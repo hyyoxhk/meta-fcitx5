@@ -1,4 +1,4 @@
-From 95e711a3693593f19a97bee6e3e56a1f80ed76b2 Mon Sep 17 00:00:00 2001
+From 3e1271ac1771b0a02c17adbcbf8d80989e2f773e Mon Sep 17 00:00:00 2001
 From: He Yong <hyyoxhk@163.com>
 Date: Sat, 25 Mar 2023 14:17:03 +0800
 Subject: [PATCH 4/4] Fix variable is initialized
@@ -11,7 +11,7 @@ tablebaseddictionary.cpp:656:5: warning: 'magic' may be used uninitialized in th
 |   656 |     if (magic != tableBinaryFormatMagic) {
 |       |     ^~
 
-Upstream-Status: Inappropriate [oe-core specific]
+Upstream-Status: Pending
 
 Signed-off-by: He Yong <hyyoxhk@163.com>
 ---
@@ -19,10 +19,10 @@ Signed-off-by: He Yong <hyyoxhk@163.com>
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/src/libime/table/tablebaseddictionary.cpp b/src/libime/table/tablebaseddictionary.cpp
-index 1e0067f..8621b3f 100644
+index 4cfbf5c..f7b7d98 100644
 --- a/src/libime/table/tablebaseddictionary.cpp
 +++ b/src/libime/table/tablebaseddictionary.cpp
-@@ -650,8 +650,8 @@ uint32_t maxValue(const DATrie<uint32_t> &trie) {
+@@ -818,8 +818,8 @@ void TableBasedDictionary::saveText(std::ostream &out) {
  
  void TableBasedDictionary::loadBinary(std::istream &in) {
      FCITX_D();

@@ -1,8 +1,8 @@
 require ${BPN}.inc
 
-DEPENDS = "extra-cmake-modules-native fcitx5-native boost-native"
+DEPENDS = "extra-cmake-modules-native fcitx5-native boost-native zstd-native"
 
-inherit cmake native
+inherit cmake pkgconfig native
 
 EXTRA_OECMAKE += "-DENABLE_TEST=OFF"
 

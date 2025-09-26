@@ -1,4 +1,4 @@
-From 2c72deb66b8d97a89985ef70109b69b8ce88f4fa Mon Sep 17 00:00:00 2001
+From a533f41c0c3eccf084c96ac4ae7abc9defe56d8a Mon Sep 17 00:00:00 2001
 From: He Yong <hyyoxhk@163.com>
 Date: Wed, 12 Apr 2023 22:43:02 +0800
 Subject: [PATCH 1/4] Do not use alias for target binary
@@ -13,7 +13,7 @@ Signed-off-by: He Yong <hyyoxhk@163.com>
  1 file changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/data/CMakeLists.txt b/data/CMakeLists.txt
-index 4ebf358..e206dc2 100644
+index a9029d1..50112c4 100644
 --- a/data/CMakeLists.txt
 +++ b/data/CMakeLists.txt
 @@ -13,13 +13,13 @@ set(LM_PREDICT_OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/sc.lm.predict")
