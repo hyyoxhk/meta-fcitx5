@@ -7,12 +7,12 @@ LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0-or-later.txt;md5=fed54355545ffd980b8
 DEPENDS = "fcitx5 fmt curl opencc libime gettext libime-native"
 RDEPENDS:${PN} = "fcitx5 curl opencc libime"
 
-SRC_URI = "https://download.fcitx-im.org/fcitx5/${BPN}/${BPN}-${PV}_dict.tar.xz \
+SRC_URI = "https://download.fcitx-im.org/fcitx5/${BPN}/${BPN}-${PV}_dict.tar.zst \
            file://0001-Add-CMAKE_SYSROOT-to-find-additional-cmake-file.patch \
            file://0002-Add-cmake-option-ENABLE_METAINFO.patch \
-           file://0003-Work-arround-to-execute-libime_pinyindict-for-cross-.patch \
+           file://0003-Work-arround-to-execute-pinyindict-for-cross-build.patch \
            "
-SRC_URI[sha256sum] = "7dc7ab82f373199973c125035835d948d5714dcde393d7408d190a8013c1346e"
+SRC_URI[sha256sum] = "c922f643f032b2bb818cd327e2e79286318d38dfa62d3e92e42dd9fce6df8954"
 
 inherit cmake pkgconfig gettext
 
