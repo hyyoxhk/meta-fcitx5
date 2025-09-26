@@ -1,0 +1,30 @@
+From 45039d8fae5b6756fab5307d5a334852bcd0c67d Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Thu, 19 Aug 2021 09:56:47 +0900
+Subject: [PATCH 3/3] Work arround to execute pinyindict for cross build
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ im/pinyin/CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/im/pinyin/CMakeLists.txt b/im/pinyin/CMakeLists.txt
+index 9e06e48..66ae14a 100644
+--- a/im/pinyin/CMakeLists.txt
++++ b/im/pinyin/CMakeLists.txt
+@@ -33,8 +33,8 @@ if (ENABLE_DATA)
+ 
+   add_custom_command(
+     OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/chaizi.dict"
+-    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/chaizi.txt" LibIME::pinyindict
+-    COMMAND LibIME::pinyindict "${CMAKE_CURRENT_SOURCE_DIR}/chaizi.txt" "${CMAKE_CURRENT_BINARY_DIR}/chaizi.dict")
++    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/chaizi.txt"
++    COMMAND "pinyindict" "${CMAKE_CURRENT_SOURCE_DIR}/chaizi.txt" "${CMAKE_CURRENT_BINARY_DIR}/chaizi.dict")
+   add_custom_target(chaizi-dict ALL DEPENDS "chaizi.dict")
+   install(FILES "${CMAKE_CURRENT_BINARY_DIR}/chaizi.dict" DESTINATION "${FCITX_INSTALL_PKGDATADIR}/pinyin")
+ endif()
+-- 
+2.34.1
+
