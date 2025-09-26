@@ -18,6 +18,7 @@ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
 PACKAGECONFIG[x11] = "-DENABLE_X11=On,-DENABLE_X11=Off,qtx11extras libx11 xkeyboard-config"
 
 EXTRA_OECMAKE += " \
+    -DUSE_QT6=Off \
     -DCMAKE_SYSROOT=${RECIPE_SYSROOT} \
     -DENABLE_KCM=Off \
     -DFCITX_TOOL_BINARY_DIR=${STAGING_LIBDIR_NATIVE}/fcitx/ \
