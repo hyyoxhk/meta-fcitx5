@@ -35,11 +35,11 @@ Please see the corresponding sections below for details.
 ## Quick Start
 
 ```shell
-$> git clone -b kirkstone https://git.yoctoproject.org/poky
+$> git clone -b scarthgap https://git.yoctoproject.org/poky
 $> cd poky
-$> git clone -b kirkstone https://github.com/openembedded/meta-openembedded.git
-$> git clone -b kirkstone https://github.com/meta-qt5/meta-qt5.git
-$> git clone -b kirkstone https://github.com/hyyoxhk/meta-fcitx5.git
+$> git clone -b scarthgap https://github.com/openembedded/meta-openembedded.git
+$> git clone -b scarthgap https://github.com/meta-qt5/meta-qt5.git
+$> git clone -b scarthgap https://github.com/hyyoxhk/meta-fcitx5.git
 $>
 $> source oe-init-build-env
 ...
