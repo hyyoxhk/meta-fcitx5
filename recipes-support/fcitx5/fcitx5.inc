@@ -9,6 +9,7 @@ SRC_URI = "https://download.fcitx-im.org/fcitx5/fcitx5/fcitx5-${PV}_dict.tar.xz 
            file://0002-Use-CMAKE_INSTALL_INCLUDEDIR-instead-of-CMAKE_INSTAL.patch \
            file://0003-Use-CMAKE_INSTALL_FULL_LIBDIR-instead-of-CMAKE_INSTA.patch \
            file://0001-Tweak-include-directories-to-care-CMAKE_SYSROOT.patch \
+           file://0001-Add-missing-includes-for-cstdint.patch \
            "
 SRC_URI[sha256sum] = "1a746d3a0337ed446999234324d731303b9db21186d4d6842e5dd3a035a6bd6e"
 
